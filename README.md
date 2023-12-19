@@ -80,11 +80,3 @@ variable "user" {
 ## Important Note
 
 Ensure that AWS credentials are configured on your machine before running Terraform commands. Refer to the [AWS CLI documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) for details.
-
-## Project Name
-
-**High Resiliency Application**
-
----
-
-Feel free to customize this README based on your specific project details and requirements.
