@@ -1,1 +1,1 @@
-key = "terraform-state/citrix/prod/terraform.tfstate"
+key = "terraform-state/hra/prod/terraform.tfstate"
