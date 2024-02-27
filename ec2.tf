@@ -1,3 +1,4 @@
+/*
 #Terraform to launch EC2 Instance #
 
 resource "aws_launch_configuration" "hra_template_conf" {
@@ -101,3 +102,5 @@ resource "aws_cloudwatch_metric_alarm" "watch_cpu_alarm_down" {
   alarm_description = "This metric monitors ec2 cpu utilization"
   alarm_actions     = [aws_autoscaling_policy.cpu_utilisation_down.arn]
 }
+
+*/

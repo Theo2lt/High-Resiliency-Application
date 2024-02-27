@@ -1,14 +1,35 @@
-variable "pwd" {
-  type    = string
-  default = "MySecurePass"
+### CONTEXT ###
+variable "env" {
+  type        = string
+  description = "type of env (pre-production | production)"
 }
 
-variable "db" {
-  type    = string
-  default = "db"
+variable "project" {
+  type        = string
+  description = "name of project"
 }
 
-variable "user" {
-  type    = string
-  default = "user"
+variable "region" {
+  type        = string
+  description = "default region"
+}
+
+### NETWORK ###
+
+variable "vpc_cidr_block" {
+  type        = string
+  description = "vpc cidr_block "
+}
+
+variable "vpc_name" {
+  type        = string
+  description = "name of vpc"
+}
+
+variable "internet_gateway_name" {
+  type = string
+}
+
+variable "subnets" {
+  type = list(any)
 }

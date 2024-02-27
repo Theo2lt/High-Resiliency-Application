@@ -1,3 +1,5 @@
+/*
+
 ### elb ###
 resource "aws_lb" "hra_load_balancer" {
   name               = "web-app-lb"
@@ -64,3 +66,5 @@ resource "aws_lb_listener_rule" "instances" {
     target_group_arn = aws_lb_target_group.hra_lb_target_group.arn
   }
 }
+
+*/

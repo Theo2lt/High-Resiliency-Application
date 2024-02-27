@@ -6,14 +6,14 @@ terraform {
     }
   }
 
-  backend "s3" {
-    bucket         = "s3-backend-hra"
-    key            = "terraform.tfstate"
-    region         = "eu-west-1"
-    dynamodb_table = "S3Lock"
-  }
+  #backend "s3" {
+  #  bucket         = "s3-backend-hra"
+  #  key            = "terraform.tfstate"
+  #  region         = "eu-west-1"
+  #  dynamodb_table = "S3Lock"
+  #}
 }
 
 provider "aws" {
-  region = "eu-west-1"
+  region = var.region
 }

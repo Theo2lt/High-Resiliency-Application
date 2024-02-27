@@ -1,3 +1,4 @@
+/*
 resource "aws_db_instance" "db_hra" {
   db_subnet_group_name   = aws_db_subnet_group.sub_group_hra_db.name
   vpc_security_group_ids = [aws_security_group.hra_rds.id]
@@ -20,3 +21,4 @@ resource "aws_db_subnet_group" "sub_group_hra_db" {
     Name = "hra_subnet_group"
   }
 }
+*/

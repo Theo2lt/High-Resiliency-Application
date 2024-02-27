@@ -1,5 +1,5 @@
 # Security group elb # 
-
+/*
 resource "aws_security_group" "hra_elb" {
 
   name        = "hra_elb"
@@ -81,3 +81,5 @@ resource "aws_security_group_rule" "hra_rds_egress" {
   security_group_id = aws_security_group.hra_rds.id
   cidr_blocks       = ["0.0.0.0/0"]
 }
+
+*/
