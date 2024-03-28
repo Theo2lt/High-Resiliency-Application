@@ -1,4 +1,5 @@
 ### CONTEXT ###
+
 variable "env" {
   type        = string
   description = "type of env (pre-production | production)"
@@ -7,11 +8,6 @@ variable "env" {
 variable "project" {
   type        = string
   description = "name of project"
-}
-
-variable "region" {
-  type        = string
-  description = "default region"
 }
 
 ### NETWORK ###
@@ -26,10 +22,19 @@ variable "vpc_name" {
   description = "name of vpc"
 }
 
+variable "nat_gateway_enable" {
+  type    = bool
+  default = false
+}
+
 variable "internet_gateway_name" {
   type = string
 }
 
 variable "subnets" {
-  type = list(any)
+  type = map(object({
+    type  = string
+    az    = number
+    scidr = string
+  }))
 }

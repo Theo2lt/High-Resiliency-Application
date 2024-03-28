@@ -6,14 +6,20 @@ terraform {
     }
   }
 
-  #backend "s3" {
-  #  bucket         = "s3-backend-hra"
-  #  key            = "terraform.tfstate"
-  #  region         = "eu-west-1"
-  #  dynamodb_table = "S3Lock"
-  #}
+  backend "s3" {
+    bucket         = "tliotbackend"
+    key            = "terraform.tfstate"
+    region         = "eu-west-1"
+    dynamodb_table = "S3Lock"
+  }
 }
 
 provider "aws" {
-  region = var.region
+  region = "eu-west-1"
 }
+
+provider "aws" {
+  alias  = "Ireland"
+  region = "eu-west-1"
+}
+

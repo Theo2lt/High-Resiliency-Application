@@ -1,7 +1,7 @@
-/*
-resource "aws_db_instance" "db_hra" {
-  db_subnet_group_name   = aws_db_subnet_group.sub_group_hra_db.name
-  vpc_security_group_ids = [aws_security_group.hra_rds.id]
+
+resource "aws_db_instance" "database" {
+  db_subnet_group_name   = aws_db_subnet_group.sub_group_database.name
+  vpc_security_group_ids = [aws_security_group.database.id]
   allocated_storage      = 5
   db_name                = var.db
   engine                 = "mysql"
@@ -11,14 +11,14 @@ resource "aws_db_instance" "db_hra" {
   password               = var.pwd
   parameter_group_name   = "default.mysql5.7"
   skip_final_snapshot    = true
+  storage_encrypted      = true
 }
 
-resource "aws_db_subnet_group" "sub_group_hra_db" {
+resource "aws_db_subnet_group" "sub_group_database" {
   name       = "main"
-  subnet_ids = aws_subnet.private_database.*.id
+  subnet_ids = data.aws_subnets.protected.ids
 
   tags = {
-    Name = "hra_subnet_group"
+    Name = "sub_group_database"
   }
 }
-*/

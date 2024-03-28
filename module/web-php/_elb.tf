@@ -1,19 +1,19 @@
-/*
+
 
 ### elb ###
-resource "aws_lb" "hra_load_balancer" {
-  name               = "web-app-lb"
+resource "aws_lb" "application_load_balancer" {
+  name               = "ApplicationLoadBalancer"
   load_balancer_type = "application"
-  subnets            = aws_subnet.public.*.id
-  security_groups    = [aws_security_group.hra_elb.id]
+  subnets            = data.aws_subnets.public.ids
+  security_groups    = [aws_security_group.application_load_balancer.id]
 }
 
 ### target group hra ###
-resource "aws_lb_target_group" "hra_lb_target_group" {
-  name     = "hra-target-group"
+resource "aws_lb_target_group" "targets" {
+  name     = "targets"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = aws_vpc.vpc_hra.id
+  vpc_id   = module.network.aws_vpc_vpc.id
 
   health_check {
     enabled             = true
@@ -29,8 +29,8 @@ resource "aws_lb_target_group" "hra_lb_target_group" {
 }
 
 ### listener https ###
-resource "aws_lb_listener" "hra_lb_listener" {
-  load_balancer_arn = aws_lb.hra_load_balancer.arn
+resource "aws_lb_listener" "listener" {
+  load_balancer_arn = aws_lb.application_load_balancer.arn
   port              = 80
   protocol          = "HTTP"
   default_action {
@@ -45,14 +45,14 @@ resource "aws_lb_listener" "hra_lb_listener" {
 }
 
 
-resource "aws_autoscaling_attachment" "hra_attachement_targets" {
-  autoscaling_group_name = aws_autoscaling_group.hra_asg.id
-  lb_target_group_arn    = aws_lb_target_group.hra_lb_target_group.arn
+resource "aws_autoscaling_attachment" "attachement_ec2" {
+  autoscaling_group_name = aws_autoscaling_group.autoscaling_group.id
+  lb_target_group_arn    = aws_lb_target_group.targets.arn
 }
 
 
 resource "aws_lb_listener_rule" "instances" {
-  listener_arn = aws_lb_listener.hra_lb_listener.arn
+  listener_arn = aws_lb_listener.listener.arn
   priority     = 100
 
   condition {
@@ -63,8 +63,7 @@ resource "aws_lb_listener_rule" "instances" {
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.hra_lb_target_group.arn
+    target_group_arn = aws_lb_target_group.targets.arn
   }
 }
 
-*/
